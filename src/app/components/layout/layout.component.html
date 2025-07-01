@@ -1,0 +1,19 @@
+<div class="layout-container">
+    <!-- Sidebar -->
+    <nav class="sidebar" *ngIf="showSidebar">
+        <div class="logo">YourCompany</div>
+        <ul>
+            <li><a routerLink="/dashboard" routerLinkActive="active" (click)="onNavClick()">Dashboard</a></li>
+            <li><a routerLink="/profile" routerLinkActive="active" (click)="onNavClick()">Profile</a></li>
+            <li><a routerLink="/settings" routerLinkActive="active" (click)="onNavClick()">Settings</a></li>
+            <li><a (click)="logout()">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hamburger menu (mobile only) -->
+        <button class="toggle-btn" *ngIf="isMobile" (click)="toggleSidebar()">☰</button>
+        <router-outlet></router-outlet>
+    </div>
+</div>
