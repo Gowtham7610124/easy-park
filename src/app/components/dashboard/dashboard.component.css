@@ -1,0 +1,105 @@
+.total-count_row .col-md-2{
+    /* border: solid 1px #000; */
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 10px 10px 10px 10px;
+    margin: 10px auto;
+    border-radius: 8px;
+}
+
+.total-count_row .col-md-2 p{
+    margin: 0 !important;
+}
+
+.second-header{
+    margin: 2rem 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+}
+
+/* Container */
+.parking-lot-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.parking-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Grid */
+.parking-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 15px;
+}
+
+/* Slot Box */
+.parking-slot {
+  background: #f1f1f1;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+/* Status Colors */
+.available {
+  background-color: #4caf50; /* Green */
+}
+
+.occupied {
+  background-color: #f44336; /* Red */
+}
+
+.maintenance {
+  background-color: #ff9800; /* Orange */
+}
+
+.reserved {
+  background-color: #3f51b5; /* Indigo */
+}
+
+/* Text inside slots */
+.slot-number {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.slot-status {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.slot-time {
+  font-size: 13px;
+  margin-top: 3px;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .parking-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .parking-slot {
+    padding: 10px;
+  }
+
+  .slot-number {
+    font-size: 16px;
+  }
+
+  .slot-status,
+  .slot-time {
+    font-size: 12px;
+  }
+}
