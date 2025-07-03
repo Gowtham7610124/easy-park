@@ -17,10 +17,7 @@ export class LoginComponent {
   onLogin() {
   this.userSrv.loginUser(this.loginObj).subscribe(
     (res: IUserModel) => {
-      console.log(res);
       localStorage.setItem("parkUser",JSON.stringify(res))
-      
-      // console.log(delta.extraId)
       this.router.navigateByUrl('dashboard')
     },
     (error) => {

@@ -52,7 +52,6 @@ export class DashboardComponent implements OnInit{
   getSites(){
     this.masrerSer.getSiteByClientId().subscribe((res:ResponseModal)=>{
       this.siteList = res.data
-      console.log(this.siteList)
     })
   }
 
@@ -63,7 +62,6 @@ export class DashboardComponent implements OnInit{
 
   this.masrerSer.getBuildingByClientId(siteId).subscribe((res) => {
     this.siteBuilding = res.data;
-    // console.log(this.siteBuilding);
   });
 
   
@@ -86,14 +84,12 @@ export class DashboardComponent implements OnInit{
     const BuildingId = (event.target as HTMLSelectElement).value;
     this.masrerSer.getSiteByBuildingId(BuildingId).subscribe((res) => {
       this.BuildingFloor = res.data;
-      console.log(this.BuildingFloor);
     });
   }
 
   getParkingSpots(event: Event){
     const floorId = (event.target as HTMLSelectElement).value;
     this.floorId = floorId
-    console.log(floorId)
     const floor = this.BuildingFloor.find((m:any)=>m.floorId == floorId);
     if (!floor) return; // exit if not found
 
@@ -101,16 +97,12 @@ export class DashboardComponent implements OnInit{
       for (let index = 1; index <= floor?.totalParkingSpots; index++) {
         this.parkingSpotArray.push(index)
       }
-    console.log(this.parkingSpotArray)
       this.getBooking();
-
-    // getAllParkingByFloor
   }
 
   getBooking(){
     this.masrerSer.getAllParkingByFloor(this.floorId).subscribe((res) => {
       this.bookedSpotList = res.data;
-      console.log(this.bookedSpotList);
     });
   }
 
@@ -121,8 +113,6 @@ export class DashboardComponent implements OnInit{
       this.bookForm.patchValue({
         parkSpotNo: spotNo
       });
-      // this.bookForm.value.parkSpotNo = 1
-      // console.log(this.bookForm)
     }
   }
 
@@ -152,7 +142,6 @@ export class DashboardComponent implements OnInit{
     this.masrerSer.bookSpots(this.bookSpot).subscribe((res:any)=>{
       alert("booked")
     })
-    console.log('Booking object:', this.bookSpot);
       this.getBooking();
   }
 }

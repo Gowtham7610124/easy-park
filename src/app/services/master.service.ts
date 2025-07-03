@@ -8,7 +8,6 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class MasterService {
-  // inject: any;
   userSer = inject(UserService)
 
   constructor(private http: HttpClient) { }
@@ -20,30 +19,18 @@ export class MasterService {
   }
 
   getBuildingByClientId(siteId:any): Observable<ResponseModal>{
-    // const deltaString = localStorage.getItem("parkUser")
-      // const delta = deltaString ? JSON.parse(deltaString) : null;
-      console.log(siteId)
     return this.http.get<ResponseModal>('https://api.freeprojectapi.com/api/SmartParking/GetBuildingBySiteId?id='+siteId)
   }
 
   getSiteByBuildingId(BuildingId:any): Observable<ResponseModal>{
-    // const deltaString = localStorage.getItem("parkUser")
-    //   const delta = deltaString ? JSON.parse(deltaString) : null;
-      console.log(BuildingId)
     return this.http.get<ResponseModal>('https://api.freeprojectapi.com/api/SmartParking/GetFloorsByBuildingId?id='+BuildingId)
   }
 
   bookSpots(data:any): Observable<ResponseModal>{
-    // const deltaString = localStorage.getItem("parkUser")
-    //   const delta = deltaString ? JSON.parse(deltaString) : null;
-      // console.log(BuildingId)
     return this.http.post<ResponseModal>('https://api.freeprojectapi.com/api/SmartParking/AddParking',data)
   }
 
   getAllParkingByFloor(data:any): Observable<ResponseModal>{
-    // const deltaString = localStorage.getItem("parkUser")
-    //   const delta = deltaString ? JSON.parse(deltaString) : null;
-      // console.log(BuildingId)
     return this.http.get<ResponseModal>('https://api.freeprojectapi.com/api/SmartParking/GetAllParkingByFloor?id='+data)
   }
 }
