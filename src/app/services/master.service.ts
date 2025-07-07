@@ -33,4 +33,10 @@ export class MasterService {
   getAllParkingByFloor(data:any): Observable<ResponseModal>{
     return this.http.get<ResponseModal>('https://api.freeprojectapi.com/api/SmartParking/GetAllParkingByFloor?id='+data)
   }
+
+
+  exitSpot(data:any): Observable<ResponseModal>{
+    console.log(data)
+    return this.http.post<ResponseModal>('https://api.freeprojectapi.com/api/SmartParking/MarExit',data)
+  }
 }

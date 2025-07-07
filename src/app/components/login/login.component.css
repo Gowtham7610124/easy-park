@@ -1,110 +1,80 @@
-
-.main-login{
-      background: url('/assets/wallpaperflare.com_wallpaper.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-/* Container styling */
-.login-container {
-  width: 100%;
-  max-width: 500px;
-  height: 100vh;
-  margin: 0 auto;
+/* Main Login Container */
+.main-login {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #0b1e38, #1d3557);
+  padding: 20px;
 }
 
-/* Login box styling */
-.login-box {
-   background: rgba(255, 255, 255, 0.36);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 18px 9px rgba(255, 255, 255, 0.9);
-  position: relative;
-  overflow: hidden;
-  padding: 35px 30px;
-  border-radius: 15px;
+/* Login Card */
+.login-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 40px 30px;
   width: 100%;
+  max-width: 400px;
+  text-align: center;
 }
 
-/* Company name */
-.company-name {
-  text-align: center;
-  font-size: 14px;
+.login-box .company-name {
+  font-size: 24px;
   font-weight: bold;
-  color: #666;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  margin-bottom: 15px;
+  color: #0b1e38;
 }
 
-/* Title */
 .login-box h2 {
-  text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  font-size: 22px;
   color: #333;
 }
 
-/* Form input group */
+/* Input Group Styling */
 .input-group {
+  text-align: left;
   margin-bottom: 20px;
 }
 
 .input-group label {
   display: block;
   margin-bottom: 6px;
-  color: #444;
-  font-weight: 600;
+  font-weight: 500;
+  color: #333;
 }
 
 .input-group input {
   width: 100%;
-  padding: 12px 14px;
+  padding: 10px 12px;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px;
   transition: border 0.3s ease;
 }
 
 .input-group input:focus {
-  border-color: #4b6cb7;
   outline: none;
+  border-color: #0b1e38;
+  box-shadow: 0 0 5px rgba(11, 30, 56, 0.3);
 }
 
-/* Button styling */
-button {
+/* Login Button */
+button[type="submit"] {
   width: 100%;
-  padding: 12px;
-  background: #4b6cb7;
+  background-color: #0b1e38;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 17px;
-  font-weight: 600;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-  background: #3a5296;
-}
-
-/* Responsive tweak for smaller devices */
-@media (max-width: 480px) {
-  .login-box {
-    padding: 25px 20px;
-    margin: 0 10px;
-  }
-
-  .input-group input,
-  button {
-    font-size: 15px;
-  }
+button[type="submit"]:hover {
+  background-color: #1d3557;
+  transform: scale(1.02);
 }

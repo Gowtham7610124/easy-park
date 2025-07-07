@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit{
   parkingSpotArray:number [] = [];
   bookedSpotList:any[] = [];
   @ViewChild("bookspot") bookModal!:ElementRef;
+  @ViewChild("releaseSpot") releaseModal!:ElementRef;
   bookSpot={
     
   "parkId": 0,
@@ -35,6 +36,9 @@ export class DashboardComponent implements OnInit{
 
   }
    bookForm: FormGroup;
+   releaseForm:FormGroup;
+   availabelParking:string [] = [];
+   occupiedParking:string[]=[]
   constructor(){
     this.bookForm = new FormGroup({
       parkSpotNo: new FormControl(''),
@@ -43,6 +47,13 @@ export class DashboardComponent implements OnInit{
       custName: new FormControl(''),
       inTime: new FormControl('')
     });
+
+    this.releaseForm = new FormGroup({
+      parkId: new FormControl(0),
+      outTime: new FormControl (new Date()), // datetime-local default
+      extraCharge: new FormControl(0)
+    });
+
   }
   ngOnInit() :void {
     this.getSites();
@@ -78,6 +89,29 @@ export class DashboardComponent implements OnInit{
   }
 
 
+calculateAvailableAndOccupied() {
+  this.occupiedParking = [];
+  this.availabelParking = [];
+
+  this.parkingSpotArray.forEach((spot:any) => {
+    console.log(spot)
+    const isOccupied = this.bookedSpotList.some(
+      booking => String(booking.parkSpotNo) === String(spot) && booking.outTime == null
+    );
+
+    if (isOccupied) {
+      this.occupiedParking.push(spot);
+    } else {
+      this.availabelParking.push(spot);
+    }
+  });
+
+  // console.log('Available:', this.availabelParking);
+  // console.log('Occupied:', this.occupiedParking);
+}
+
+
+
   getFloorByBuildingId(event: Event){
     this.parkingSpotArray = [];
   this.BuildingFloor = [];
@@ -103,7 +137,10 @@ export class DashboardComponent implements OnInit{
   getBooking(){
     this.masrerSer.getAllParkingByFloor(this.floorId).subscribe((res) => {
       this.bookedSpotList = res.data;
+    this.calculateAvailableAndOccupied();
+
     });
+
   }
 
   // MODAL OPEN
@@ -120,6 +157,36 @@ export class DashboardComponent implements OnInit{
     if(this.bookModal){
       this.bookModal.nativeElement.style.display='none'
     }
+  }
+
+  // RELEASE MODAL
+  openReleaseModal(parkId:number){
+    console.log(parkId)
+    this.releaseForm.patchValue({
+      parkId: parkId,
+      outTime: new Date(),
+      extraCharge: 0
+    });
+
+    this.releaseModal.nativeElement.style.display = 'block';
+  }
+
+  closeReleaseModal(){
+    if(this.releaseModal){
+      this.releaseModal.nativeElement.style.display='none'
+    }
+  }
+
+  onSubmitRelease(){
+
+    const releaseData = this.releaseForm.value;
+    console.log(releaseData)
+
+
+    this.masrerSer.exitSpot(releaseData).subscribe((res:any)=>{
+      // alert("booked")
+      this.closeReleaseModal()
+    })
   }
 
   onSubmitBooking() {
@@ -140,8 +207,15 @@ export class DashboardComponent implements OnInit{
     };
 
     this.masrerSer.bookSpots(this.bookSpot).subscribe((res:any)=>{
-      alert("booked")
+      this.closeModal();
     })
       this.getBooking();
   }
 }
+
+
+// {
+//   "parkId": 0,
+//   "outTime": "2025-07-04T03:17:42.595Z",
+//   "extraCharge": 0
+// }

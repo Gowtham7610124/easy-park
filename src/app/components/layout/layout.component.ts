@@ -1,4 +1,5 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -8,6 +9,7 @@ import { Component, HostListener } from '@angular/core';
 export class LayoutComponent {
   isMobile = false;
   showSidebar = true;
+  router=inject(Router);
 
   constructor() {
     this.checkScreenSize();
@@ -34,7 +36,8 @@ export class LayoutComponent {
     }
   }
 
-  logout() {
-    alert('Logged out');
-  }
+  logout(): void {
+  localStorage.removeItem('parkUser'); // or use clear() to remove everything
+  this.router.navigate(['/']); // Redirect to login or home page
+}
 }

@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { authGuard } from './components/auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -18,7 +21,18 @@ const routes: Routes = [
     children:[
       {
         path:'dashboard',
-        component:DashboardComponent
+        component:DashboardComponent,
+        canActivate:[authGuard]
+      },
+       {
+        path:'profile',
+        component:ProfileComponent,
+        canActivate:[authGuard]
+      },
+       {
+        path:'setting',
+        component:SettingsComponent,
+        canActivate:[authGuard]
       }
     ]
   }

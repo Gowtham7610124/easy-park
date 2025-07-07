@@ -1,12 +1,15 @@
 <div class="dashboard-container">
     <div class="container">
         <div class="total-count_row row">
+            <div class="col-md-1"></div>
+            <div class="col-md-1"></div>
+
             <div class="col-md-2 d-flex justify-content-between">
                 <div class="total-cont-text">
                     <p>Total Spot</p>
                 </div>
                 <div class="total-count-int">
-                    <p>50</p>
+                    <p>{{ parkingSpotArray.length }}</p> <!-- Total -->
                 </div>
             </div>
             <div class="col-md-1"></div>
@@ -15,7 +18,7 @@
                     <p>Available Spot</p>
                 </div>
                 <div class="total-count-int">
-                    <p>50</p>
+                    <p>{{ availabelParking.length }}</p> <!-- Available -->
                 </div>
             </div>
             <div class="col-md-1"></div>
@@ -25,30 +28,30 @@
                     <p>Accepted Spot</p>
                 </div>
                 <div class="total-count-int">
-                    <p>50</p>
+                    <p>{{ occupiedParking.length }}</p> <!-- Occupied -->
                 </div>
             </div>
             <div class="col-md-1"></div>
 
-            <div class="col-md-2 d-flex justify-content-between">
+            <!-- <div class="col-md-2 d-flex justify-content-between">
                 <div class="total-cont-text">
                     <p>Occupied Spot</p>
                 </div>
                 <div class="total-count-int">
                     <p>50</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
-    <div class="container">
-        <div class="second-header">
+    <!-- <div class="container">
+        <div class="">
             <p>Parking Layout</p>
             <p>Refresh</p>
         </div>
-    </div>
+    </div> -->
 
-    <div class="dropdown-list">
+    <div class="dropdown-list second-header">
         <select (change)="getSiteList($event)">
             <option value="0">Select Site</option>
             <option *ngFor="let item of siteList" [value]="item.siteId">
@@ -87,7 +90,7 @@
 
             <div *ngFor="let parkingSpot of parkingSpotArray">
                 <ng-container *ngIf="checkIfSpotBooked(parkingSpot) as bookInfo">
-                    <div class="parking-slot occupied">
+                    <div class="parking-slot occupied" (click)="openReleaseModal(bookInfo.parkId)">
                         <div class="slot-number">{{parkingSpot}}</div>
                         <div class="slot-status">Occupied</div>
                         <div class="slot-time">{{bookInfo.vehicleNo}}</div>
@@ -174,6 +177,42 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- RELEASE PARKING -->
+<!-- RELEASE PARKING MODAL -->
+<div #releaseSpot class="modal modal-fade" id="releaseModal" tabindex="-1" aria-labelledby="releaseModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="releaseModalLabel">Release Parking</h5>
+                <button type="button" class="btn-close" (click)="closeReleaseModal()" aria-label="Close"></button>
+            </div>
+
+            <form [formGroup]="releaseForm" (ngSubmit)="onSubmitRelease()">
+                <div class="modal-body">
+
+                    <label>Park ID</label>
+                    <input type="number" class="form-control" formControlName="parkId" readonly />
+
+                    <label>Out Time</label>
+                    <input type="datetime-local" class="form-control" formControlName="outTime" />
+
+                    <label>Extra Charge</label>
+                    <input type="number" class="form-control" formControlName="extraCharge" />
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="closeReleaseModal()">Close</button>
+                    <button type="submit" class="btn btn-primary">Release</button>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>
